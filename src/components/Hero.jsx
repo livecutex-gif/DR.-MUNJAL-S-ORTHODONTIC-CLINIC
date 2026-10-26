@@ -7,23 +7,23 @@ export default function Hero({ settings, onBookClick, t }) {
   const phone = settings?.phone_number || '+919215666440';
 
   return (
-    <section className="hero-section hero-ambient-wrapper" style={{ position: 'relative' }}>
+    <section className="hero-section" style={{ position: 'relative' }}>
       <div className="content-wrap">
         <div className="hero-grid">
           
-          {/* Hero Visual Column - First on mobile (order: 1), Right on desktop (order: 2) */}
+          {/* Doctor Portrait Visual - Clean & Frameless, No Box */}
           <div className="hero-doctor-col">
-            <div className="hero-visual-card">
+            <div className="hero-clean-doctor-box">
               <img 
-                src="/hero-bg.jpg" 
-                alt="Dr. Munjal’s Orthodontic Clinic"
-                className="hero-main-img"
+                src="/doctor-portrait.jpg" 
+                alt={doctorName}
+                className="hero-clean-doctor-img"
                 loading="eager"
               />
             </div>
           </div>
 
-          {/* Text & CTAs Column - Second on mobile (order: 2), Left on desktop (order: 1) */}
+          {/* Text & CTAs Column */}
           <div className="hero-text-col">
             
             {/* Main Headline */}
@@ -36,7 +36,7 @@ export default function Hero({ settings, onBookClick, t }) {
 
             {/* Clean Subheadline with Doctor Intro */}
             <p className="hero-subheadline">
-              <strong style={{ color: '#0F172A', fontWeight: 700 }}>{doctorName}</strong> ({doctorDegree}) &bull; Hisar’s premier orthodontic and dental care center opposite Jindal Hospital, Model Town. Specialized in Clear Aligners, Ceramic Braces, and Painless Single-Sitting Treatments.
+              <strong style={{ color: '#0F172A', fontWeight: 700 }}>{doctorName}</strong> ({doctorDegree}) &bull; Hisar’s premier orthodontic and dental care practice opposite Jindal Hospital, Model Town. Specialized in Invisible Clear Aligners, Braces, and Painless Dental Treatments.
             </p>
 
             {/* Dual CTA Buttons */}
@@ -65,14 +65,40 @@ export default function Hero({ settings, onBookClick, t }) {
 
       <style>{`
         .hero-section {
+          position: relative;
+          min-height: calc(100vh - 75px);
+          display: flex;
+          align-items: center;
           padding-top: clamp(2rem, 4vw, 3.5rem);
           padding-bottom: clamp(2.5rem, 5vw, 4.5rem);
+          overflow: hidden;
+          background-color: #F8FAFC;
+        }
+
+        /* 100vh Hero Background with Soft Opacity */
+        .hero-section::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background-image: url('/hero-bg.jpg');
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          opacity: 0.32;
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        .hero-section > .content-wrap {
+          position: relative;
+          z-index: 1;
+          width: 100%;
         }
 
         .hero-grid {
           display: grid;
           grid-template-columns: 1fr;
-          gap: 2rem;
+          gap: 2.25rem;
           align-items: center;
         }
 
@@ -91,26 +117,28 @@ export default function Hero({ settings, onBookClick, t }) {
           gap: 1.25rem;
         }
 
-        .hero-visual-card {
+        /* Clean Frameless Doctor Portrait - No Box */
+        .hero-clean-doctor-box {
           width: 100%;
           max-width: 360px;
-          aspect-ratio: 1 / 1.1;
-          border-radius: 24px;
+          border-radius: 28px;
           overflow: hidden;
-          box-shadow: 0 20px 45px -12px rgba(2, 132, 199, 0.2), 0 8px 16px -4px rgba(15, 23, 42, 0.06);
-          border: 1px solid rgba(226, 232, 240, 0.8);
-          background-color: #F0F9FF;
+          box-shadow: 0 20px 45px -15px rgba(15, 23, 42, 0.22);
+          background: transparent;
+          border: none;
         }
 
-        .hero-main-img {
+        .hero-clean-doctor-img {
           width: 100%;
-          height: 100%;
+          height: auto;
+          aspect-ratio: 4 / 4.9;
           object-fit: cover;
+          object-position: top center;
           display: block;
           transition: transform 0.4s ease;
         }
 
-        .hero-visual-card:hover .hero-main-img {
+        .hero-clean-doctor-box:hover .hero-clean-doctor-img {
           transform: scale(1.02);
         }
 
@@ -131,7 +159,7 @@ export default function Hero({ settings, onBookClick, t }) {
         .hero-subheadline {
           font-size: clamp(0.98rem, 1.35vw, 1.15rem);
           line-height: 1.7;
-          color: #475569;
+          color: #334155;
           max-width: 620px;
         }
 
@@ -167,7 +195,7 @@ export default function Hero({ settings, onBookClick, t }) {
           }
         }
 
-        /* Desktop Viewport (>= 900px): Text Left, Visual Right */
+        /* Desktop Viewport (>= 900px): Text Left, Doctor Right */
         @media (min-width: 900px) {
           .hero-grid {
             grid-template-columns: 1.15fr 0.85fr !important;
@@ -185,10 +213,9 @@ export default function Hero({ settings, onBookClick, t }) {
             justify-content: flex-end !important;
           }
 
-          .hero-visual-card {
+          .hero-clean-doctor-box {
             max-width: 440px !important;
-            aspect-ratio: 4 / 4.8 !important;
-            border-radius: 28px !important;
+            border-radius: 32px !important;
           }
 
           .hero-btn-main {
