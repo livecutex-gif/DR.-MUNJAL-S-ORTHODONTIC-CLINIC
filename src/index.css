@@ -705,7 +705,7 @@ input, select, textarea {
   .nav-desktop-links {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
   .nav-mobile-btn {
     display: none !important;

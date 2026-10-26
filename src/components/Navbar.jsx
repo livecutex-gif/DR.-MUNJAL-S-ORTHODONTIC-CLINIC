@@ -94,31 +94,33 @@ export default function Navbar({ settings, onBookClick, onNavigateAdmin, lang = 
           </div>
         </a>
 
-        {/* Center: Desktop Navigation Links (Visible >= 900px) */}
-        <div className="nav-desktop-links" style={{ gap: '2.5rem' }}>
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              onClick={(e) => handleLinkClick(e, link.href)}
-              style={{ 
-                fontSize: '0.95rem', 
-                fontWeight: 600, 
-                color: '#475569',
-                textDecoration: 'none',
-                transition: 'color 0.2s ease',
-                padding: '0.35rem 0'
-              }}
-              onMouseEnter={(e) => (e.target.style.color = '#0284C7')}
-              onMouseLeave={(e) => (e.target.style.color = '#475569')}
-            >
-              {link.name}
-            </a>
-          ))}
-        </div>
+        {/* Right Group: 3 Desktop Links + Book Button grouped together */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+          
+          {/* Desktop Navigation Links (Close to Book button with reduced gap) */}
+          <div className="nav-desktop-links" style={{ gap: '1.25rem' }}>
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={(e) => handleLinkClick(e, link.href)}
+                style={{ 
+                  fontSize: '0.92rem', 
+                  fontWeight: 600, 
+                  color: '#475569',
+                  textDecoration: 'none',
+                  transition: 'color 0.2s ease',
+                  padding: '0.35rem 0.25rem'
+                }}
+                onMouseEnter={(e) => (e.target.style.color = '#0284C7')}
+                onMouseLeave={(e) => (e.target.style.color = '#475569')}
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
 
-        {/* Right CTA: Pill Booking Button (Visible >= 640px, mobile uses sticky bottom bar & menu) */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          {/* Right CTA: Pill Booking Button */}
           <button
             onClick={onBookClick}
             className="btn-pill btn-primary sm:flex"
