@@ -20,7 +20,7 @@ export const translations = {
     navServices: 'Treatments',
     navAbout: 'About Doctor',
     navTimings: 'OPD Timings',
-    navReviews: 'Patient Reviews',
+    navReviews: 'Reviews',
     navLocation: 'Clinic Location',
     bookAppointment: 'Book Consultation',
     bookShort: 'Book',
