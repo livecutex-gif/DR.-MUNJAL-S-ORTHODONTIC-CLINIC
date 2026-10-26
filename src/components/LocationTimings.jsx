@@ -1,5 +1,5 @@
 import React from 'react';
-import { Clock, MapPin, Navigation, Phone, Shield, ExternalLink, CalendarCheck } from 'lucide-react';
+import { Clock, MapPin, Navigation, Phone, ExternalLink } from 'lucide-react';
 
 export default function LocationTimings({ settings }) {
   const address = settings?.clinic_address || '154-N, Model Town, Opposite Jindal Hospital, Hisar - 125005, Haryana';
@@ -16,13 +16,16 @@ export default function LocationTimings({ settings }) {
 
   return (
     <section 
-      id="timings" 
+      id="location" 
+      className="location-section"
       style={{ 
+        position: 'relative',
         backgroundColor: '#F8FAFC',
-        padding: 'clamp(3.5rem, 6vw, 5.5rem) 0'
+        padding: 'clamp(3.5rem, 6vw, 5.5rem) 0',
+        overflow: 'hidden'
       }}
     >
-      <div className="content-wrap">
+      <div className="content-wrap" style={{ position: 'relative', zIndex: 1 }}>
         
         {/* Section Header */}
         <div style={{ textAlign: 'center', maxWidth: '650px', margin: '0 auto 3rem auto' }}>
@@ -48,11 +51,13 @@ export default function LocationTimings({ settings }) {
             style={{
               padding: '2rem',
               borderRadius: '24px',
-              backgroundColor: '#F8FAFC',
+              backgroundColor: 'rgba(255, 255, 255, 0.95)',
+              backdropFilter: 'blur(8px)',
               border: '1px solid #E2E8F0',
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'space-between'
+              justifyContent: 'space-between',
+              boxShadow: '0 12px 30px rgba(15, 23, 42, 0.06)'
             }}
           >
             <div>
@@ -80,7 +85,7 @@ export default function LocationTimings({ settings }) {
               </div>
 
               {/* Day-by-day table */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem', marginBottom: '1.75rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem', marginBottom: '1.5rem' }}>
                 {schedule.map((row, idx) => (
                   <div 
                     key={idx}
@@ -125,7 +130,7 @@ export default function LocationTimings({ settings }) {
               </div>
             </div>
 
-            {/* Address Box */}
+            {/* Address Box with Clinic Exterior Photo */}
             <div 
               style={{
                 backgroundColor: '#FFFFFF',
@@ -137,10 +142,50 @@ export default function LocationTimings({ settings }) {
                 gap: '0.75rem'
               }}
             >
+              {/* Real Clinic Exterior Photo Banner */}
+              <div 
+                style={{
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  height: '160px',
+                  position: 'relative',
+                  border: '1px solid #E2E8F0',
+                  boxShadow: '0 4px 12px rgba(15, 23, 42, 0.05)'
+                }}
+              >
+                <img 
+                  src="/clinic-exterior.jpg" 
+                  alt="Dr. Munjal’s Dental Clinic Building Front View Model Town Hisar" 
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center 20%',
+                    display: 'block'
+                  }}
+                />
+                <div 
+                  style={{
+                    position: 'absolute',
+                    bottom: '8px',
+                    left: '8px',
+                    backgroundColor: 'rgba(15, 23, 42, 0.82)',
+                    backdropFilter: 'blur(6px)',
+                    color: '#FFFFFF',
+                    fontSize: '0.72rem',
+                    fontWeight: 700,
+                    padding: '3px 8px',
+                    borderRadius: '6px'
+                  }}
+                >
+                  Clinic Exterior &bull; Model Town, Hisar
+                </div>
+              </div>
+
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
                 <MapPin size={20} style={{ color: '#0284C7', flexShrink: 0, marginTop: '2px' }} />
                 <div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '2px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '2px', flexWrap: 'wrap' }}>
                     <h4 style={{ fontSize: '0.95rem', fontWeight: 800, color: '#0F172A', margin: 0 }}>
                       Clinic Address
                     </h4>
@@ -175,7 +220,6 @@ export default function LocationTimings({ settings }) {
 
           {/* Right Card: Google Maps Container & Direction Button */}
           <div 
-            id="location"
             className="prime-card"
             style={{
               borderRadius: '24px',
@@ -184,10 +228,11 @@ export default function LocationTimings({ settings }) {
               overflow: 'hidden',
               display: 'flex',
               flexDirection: 'column',
-              minHeight: '480px'
+              minHeight: '480px',
+              boxShadow: '0 12px 30px rgba(15, 23, 42, 0.06)'
             }}
           >
-            {/* Styled Map Container - Fills the entire flex height of the card */}
+            {/* Styled Map Container */}
             <div style={{ width: '100%', flex: '1 1 auto', minHeight: '360px', position: 'relative', backgroundColor: '#E2E8F0' }}>
               <iframe
                 title="Dr. Munjal's Orthodontic Clinic Location Map Hisar"
@@ -249,6 +294,20 @@ export default function LocationTimings({ settings }) {
       </div>
 
       <style>{`
+        /* Background with subtle opacity like the hero section */
+        .location-section::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background-image: url('/clinic-exterior.jpg');
+          background-size: cover;
+          background-position: center 25%;
+          background-repeat: no-repeat;
+          opacity: 0.12;
+          pointer-events: none;
+          z-index: 0;
+        }
+
         @media (min-width: 900px) {
           .timing-grid {
             grid-template-columns: 1fr 1fr !important;
