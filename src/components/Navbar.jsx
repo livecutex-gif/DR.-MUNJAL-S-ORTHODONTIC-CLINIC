@@ -17,10 +17,8 @@ export default function Navbar({ settings, onBookClick, onNavigateAdmin, lang = 
   }, []);
 
   const navLinks = [
-    { name: t?.navServices || 'Services', href: '#services' },
+    { name: t?.navServices || 'Treatments', href: '#services' },
     { name: t?.navAbout || 'About Doctor', href: '#about-doctor' },
-    { name: t?.navTimings || 'OPD Timings', href: '#timings' },
-    { name: t?.navReviews || 'Patient Reviews', href: '#reviews' },
     { name: t?.navLocation || 'Clinic Location', href: '#location' },
   ];
 
