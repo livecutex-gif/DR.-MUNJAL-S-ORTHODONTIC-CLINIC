@@ -79,7 +79,7 @@ export default function Services({ onSelectService }) {
     <section 
       id="services" 
       style={{ 
-        backgroundColor: '#F8FAFC',
+        backgroundColor: '#FFFFFF',
         padding: 'clamp(3.5rem, 6vw, 5.5rem) 0'
       }}
     >

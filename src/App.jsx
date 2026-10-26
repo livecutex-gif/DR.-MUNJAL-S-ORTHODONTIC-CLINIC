@@ -219,19 +219,32 @@ export default function App() {
 
       {/* Main Page Layout */}
       <main>
-        {/* C. Hero Section (2-Column Asymmetric Split) */}
+        {/* 1. Hero Section */}
         <Hero 
           settings={clinicSettings}
           onBookClick={scrollToBooking}
           t={t}
         />
 
-        {/* D. Services Bento Grid Section */}
+        {/* 2. About Doctor & Credentials (Hero ke baad About) */}
+        <AboutDoctor 
+          settings={clinicSettings}
+        />
+
+        {/* 3. Patient Testimonials & Google Reviews (Then Reviews) */}
+        <Reviews />
+
+        {/* 4. Treatments & Orthodontic Specializations */}
         <Services 
           onSelectService={handleSelectService}
         />
 
-        {/* E. Interactive Split Booking Section with Printable Token Slip & Queue */}
+        {/* 5. Clinic Timings & Google Maps Section */}
+        <LocationTimings 
+          settings={clinicSettings}
+        />
+
+        {/* 6. Interactive Appointment Booking Section (Footer ke upar, last mein) */}
         <BookingSection 
           settings={clinicSettings}
           preselectedService={selectedService}
@@ -240,19 +253,6 @@ export default function App() {
           t={t}
           activeServing={activeServing}
           waitingAheadCount={waitingAheadCount}
-        />
-
-        {/* F. About Doctor & Credentials */}
-        <AboutDoctor 
-          settings={clinicSettings}
-        />
-
-        {/* G. Patient Testimonials & Google Reviews */}
-        <Reviews />
-
-        {/* H. Clinic Timings & Google Maps Section */}
-        <LocationTimings 
-          settings={clinicSettings}
         />
       </main>
 

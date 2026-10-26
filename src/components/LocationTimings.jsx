@@ -18,7 +18,7 @@ export default function LocationTimings({ settings }) {
     <section 
       id="timings" 
       style={{ 
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#F8FAFC',
         padding: 'clamp(3.5rem, 6vw, 5.5rem) 0'
       }}
     >
