@@ -127,7 +127,13 @@ export async function fetchClinicSettings() {
         .select('*')
         .eq('id', 'primary')
         .single();
-      if (!error && data) return data;
+      if (!error && data) {
+        // If database still contains legacy template data (Dr. A.K. Sharma or PrimeCare), override with Dr. Puneet Munjal defaults
+        if (data.clinic_name?.includes('PrimeCare') || data.doctor_name?.includes('Sharma')) {
+          return { ...DEFAULT_CLINIC_SETTINGS, ...data, clinic_name: DEFAULT_CLINIC_SETTINGS.clinic_name, doctor_name: DEFAULT_CLINIC_SETTINGS.doctor_name, doctor_degree: DEFAULT_CLINIC_SETTINGS.doctor_degree, clinic_address: DEFAULT_CLINIC_SETTINGS.clinic_address };
+        }
+        return data;
+      }
     } catch (err) {
       console.warn('Supabase fetchClinicSettings error, using local fallback:', err);
     }
@@ -220,10 +226,18 @@ export async function createAppointment(appointmentData) {
         .select()
         .single();
       if (!error && data) {
-        // Also sync local
         const current = getLocalAppointments();
         setLocalAppointments([data, ...current]);
         return data;
+      } else if (error) {
+        // If .select() fails due to RLS, try plain insert
+        console.warn('Supabase insert with .select() failed, trying direct insert:', error.message);
+        const res = await supabase.from('appointments').insert([newRecord]);
+        if (!res.error) {
+          const current = getLocalAppointments();
+          setLocalAppointments([newRecord, ...current]);
+          return newRecord;
+        }
       }
     } catch (err) {
       console.warn('Supabase createAppointment error, saving to local fallback:', err);

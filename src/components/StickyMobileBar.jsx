@@ -14,7 +14,7 @@ export default function StickyMobileBar({ settings, onBookClick }) {
 
   return (
     <div 
-      className="md:hidden"
+      className="sticky-mobile-bar"
       style={{
         position: 'fixed',
         bottom: 0,

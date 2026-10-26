@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS public.clinic_settings (
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
--- Seed initial clinic settings row if not exists
+-- Seed / Update clinic settings row for Dr. Puneet Munjal
 INSERT INTO public.clinic_settings (
     id, clinic_name, doctor_name, doctor_degree, doctor_reg_no, 
     is_doctor_available, opd_timing_morning, opd_timing_evening, 
@@ -45,12 +45,15 @@ INSERT INTO public.clinic_settings (
     doctor_name = EXCLUDED.doctor_name,
     doctor_degree = EXCLUDED.doctor_degree,
     doctor_reg_no = EXCLUDED.doctor_reg_no,
+    is_doctor_available = EXCLUDED.is_doctor_available,
     opd_timing_morning = EXCLUDED.opd_timing_morning,
     opd_timing_evening = EXCLUDED.opd_timing_evening,
+    emergency_notice = EXCLUDED.emergency_notice,
     phone_number = EXCLUDED.phone_number,
     whatsapp_number = EXCLUDED.whatsapp_number,
     clinic_address = EXCLUDED.clinic_address,
-    google_maps_url = EXCLUDED.google_maps_url;
+    google_maps_url = EXCLUDED.google_maps_url,
+    updated_at = timezone('utc'::text, now());
 
 -- 2. Create appointments table
 CREATE TABLE IF NOT EXISTS public.appointments (
@@ -77,40 +80,73 @@ CREATE INDEX IF NOT EXISTS idx_appointments_phone ON public.appointments(patient
 ALTER TABLE public.clinic_settings ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.appointments ENABLE ROW LEVEL SECURITY;
 
--- Allow public read of clinic_settings
+-- Clean existing policies so this script can be re-run safely multiple times
+DROP POLICY IF EXISTS "Public Read Clinic Settings" ON public.clinic_settings;
+DROP POLICY IF EXISTS "Staff Update Clinic Settings" ON public.clinic_settings;
+DROP POLICY IF EXISTS "Allow All Clinic Settings" ON public.clinic_settings;
+DROP POLICY IF EXISTS "Public Insert Appointments" ON public.appointments;
+DROP POLICY IF EXISTS "Public Read Appointments" ON public.appointments;
+DROP POLICY IF EXISTS "Staff Manage Appointments" ON public.appointments;
+DROP POLICY IF EXISTS "Allow All Appointments" ON public.appointments;
+
+-- Clinic Settings Policies:
+-- Anyone can view clinic settings (OPD timings, doctor availability, contact)
 CREATE POLICY "Public Read Clinic Settings"
     ON public.clinic_settings
     FOR SELECT
     TO public
     USING (true);
 
--- Allow authenticated or public update to clinic settings (protected by Admin Dashboard)
-CREATE POLICY "Public & Admin Update Clinic Settings"
+-- Allow updating clinic settings (Admin dashboard / Staff)
+CREATE POLICY "Staff Update Clinic Settings"
     ON public.clinic_settings
-    FOR UPDATE
+    FOR ALL
     TO public
-    USING (true);
+    USING (true)
+    WITH CHECK (true);
 
--- Allow public to book appointments
+-- Appointments Policies:
+-- 1. Patients can insert their appointments
 CREATE POLICY "Public Insert Appointments"
     ON public.appointments
     FOR INSERT
     TO public
     WITH CHECK (true);
 
--- Allow viewing and managing appointments
-CREATE POLICY "Manage Appointments"
+-- 2. Patients and clinic dashboard can read appointments (needed for booking confirmation return and dashboard)
+CREATE POLICY "Public Read Appointments"
     ON public.appointments
-    FOR ALL
+    FOR SELECT
+    TO public
+    USING (true);
+
+-- 3. Clinic admin / staff can update status (confirm, complete, cancel)
+CREATE POLICY "Staff Manage Appointments"
+    ON public.appointments
+    FOR UPDATE
     TO public
     USING (true)
     WITH CHECK (true);
 
--- 4. Enable Supabase Realtime publication
-ALTER PUBLICATION supabase_realtime ADD TABLE public.clinic_settings;
-ALTER PUBLICATION supabase_realtime ADD TABLE public.appointments;
+-- 4. Safely Enable Supabase Realtime publication (without error if already added)
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_publication_tables 
+    WHERE pubname = 'supabase_realtime' AND tablename = 'clinic_settings'
+  ) THEN
+    ALTER PUBLICATION supabase_realtime ADD TABLE public.clinic_settings;
+  END IF;
 
--- 5. Clean setup: Purge any dummy demo appointments if present
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_publication_tables 
+    WHERE pubname = 'supabase_realtime' AND tablename = 'appointments'
+  ) THEN
+    ALTER PUBLICATION supabase_realtime ADD TABLE public.appointments;
+  END IF;
+END $$;
+
+-- 5. Clean setup: Purge any old dummy demo appointments
 DELETE FROM public.appointments 
 WHERE booking_reference IN ('PC-8401', 'PC-8402', 'PC-8403', 'PC-8404', 'PC-8405')
-   OR patient_name IN ('Sunita Devi', 'Rajesh Verma', 'Aarav Choudhary', 'Pooja Rani', 'Kuldeep Singh');
+   OR patient_name IN ('Sunita Devi', 'Rajesh Verma', 'Aarav Choudhary', 'Pooja Rani', 'Kuldeep Singh', 'Test Patient Verification');

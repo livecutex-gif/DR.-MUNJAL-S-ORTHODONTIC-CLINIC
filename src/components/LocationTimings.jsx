@@ -15,7 +15,13 @@ export default function LocationTimings({ settings }) {
   ];
 
   return (
-    <section id="timings" style={{ backgroundColor: '#FFFFFF' }} className="py-12 md:py-20">
+    <section 
+      id="timings" 
+      style={{ 
+        backgroundColor: '#FFFFFF',
+        padding: 'clamp(3.5rem, 6vw, 5.5rem) 0'
+      }}
+    >
       <div className="content-wrap">
         
         {/* Section Header */}

@@ -343,6 +343,18 @@ export default function Hero({ settings, onBookClick, t }) {
           flex: 1 1 170px;
         }
 
+        @media (max-width: 480px) {
+          .hero-cta-row {
+            flex-direction: column;
+            width: 100%;
+          }
+          .hero-btn-main, .hero-btn-sub {
+            width: 100% !important;
+            flex: 1 1 100% !important;
+            justify-content: center !important;
+          }
+        }
+
         .hero-stats-bar {
           margin-top: 0.5rem;
           padding: 1rem 0.75rem;

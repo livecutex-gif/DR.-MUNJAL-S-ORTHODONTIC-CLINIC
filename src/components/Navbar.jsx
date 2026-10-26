@@ -118,11 +118,11 @@ export default function Navbar({ settings, onBookClick, onNavigateAdmin, lang = 
           ))}
         </div>
 
-        {/* Right CTA: Pill Booking Button Only */}
+        {/* Right CTA: Pill Booking Button (Visible >= 640px, mobile uses sticky bottom bar & menu) */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           <button
             onClick={onBookClick}
-            className="btn-pill btn-primary"
+            className="btn-pill btn-primary sm:flex"
             style={{
               padding: '0.7rem 1.6rem',
               fontSize: '0.92rem',

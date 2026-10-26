@@ -33,7 +33,7 @@ export default function TopBar({ settings, onNavigateAdmin, lang = 'en', onToggl
             {isAvailable ? (
               <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#F1F5F9', fontWeight: 500, flexWrap: 'wrap' }}>
                 <strong style={{ color: '#34D399', fontWeight: 600 }}>{t?.opdOpenToday || 'Live OPD:'}</strong>
-                <span>{t?.morning || 'Morning'} {morningTimings} &bull; {t?.evening || 'Evening'} {eveningTimings}</span>
+                <span><span className="hidden sm:inline">{t?.morning || 'Morning'} </span>{morningTimings} &bull; <span className="hidden sm:inline">{t?.evening || 'Evening'} </span>{eveningTimings}</span>
               </span>
             ) : (
               <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#FCA5A5', fontWeight: 500 }}>
@@ -44,8 +44,8 @@ export default function TopBar({ settings, onNavigateAdmin, lang = 'en', onToggl
             )}
           </div>
 
-          {/* Location Landmark Indicator */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#94A3B8' }}>
+          {/* Location Landmark Indicator (Desktop only) */}
+          <div className="hidden sm:flex" style={{ alignItems: 'center', gap: '0.35rem', color: '#94A3B8' }}>
             <span style={{ color: '#475569' }}>&bull;</span>
             <span style={{ color: '#CBD5E1' }}>Model Town (Opp. Jindal Hospital), Hisar</span>
           </div>

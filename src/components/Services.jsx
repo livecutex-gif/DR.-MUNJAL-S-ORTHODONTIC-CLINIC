@@ -76,7 +76,13 @@ export const CLINIC_SERVICES = [
 
 export default function Services({ onSelectService }) {
   return (
-    <section id="services" style={{ backgroundColor: '#F8FAFC' }} className="py-12 md:py-20">
+    <section 
+      id="services" 
+      style={{ 
+        backgroundColor: '#F8FAFC',
+        padding: 'clamp(3.5rem, 6vw, 5.5rem) 0'
+      }}
+    >
       <div className="content-wrap">
         
         {/* Section Header */}

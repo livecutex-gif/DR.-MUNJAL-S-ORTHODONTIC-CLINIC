@@ -28,12 +28,6 @@ export default function AdminLogin({ onLoginSuccess, onBackToSite }) {
     }
   };
 
-  const fillDemoCreds = () => {
-    setEmail('admin@munjalortho.clinic');
-    setPassword('munjal123');
-    setError('');
-  };
-
   return (
     <div 
       style={{
@@ -172,40 +166,6 @@ export default function AdminLogin({ onLoginSuccess, onBackToSite }) {
             {isLoading ? 'Verifying Credentials...' : 'Sign In to OPD Dashboard'}
           </button>
         </form>
-
-        {/* Demo Fast Fill Card */}
-        <div 
-          style={{
-            marginTop: '1.75rem',
-            paddingTop: '1.25rem',
-            borderTop: '1px solid #E2E8F0',
-            textAlign: 'center'
-          }}
-        >
-          <div style={{ fontSize: '0.75rem', color: '#64748B', marginBottom: '0.625rem' }}>
-            Instant Testing Access (Demo Mode)
-          </div>
-          <button
-            type="button"
-            onClick={fillDemoCreds}
-            className="btn-pill"
-            style={{
-              backgroundColor: '#F0F9FF',
-              color: '#0284C7',
-              border: '1px solid #BAE6FD',
-              padding: '0.5rem 1rem',
-              fontSize: '0.8rem',
-              width: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '0.5rem'
-            }}
-          >
-            <Key size={14} />
-            <span>Fill Demo Credentials (admin@munjalortho.clinic)</span>
-          </button>
-        </div>
 
       </div>
 

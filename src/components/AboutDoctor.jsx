@@ -30,7 +30,15 @@ export default function AboutDoctor({ settings }) {
   ];
 
   return (
-    <section id="about-doctor" style={{ backgroundColor: '#FFFFFF', borderTop: '1px solid #E2E8F0', borderBottom: '1px solid #E2E8F0' }} className="py-12 md:py-20">
+    <section 
+      id="about-doctor" 
+      style={{ 
+        backgroundColor: '#FFFFFF', 
+        borderTop: '1px solid #E2E8F0', 
+        borderBottom: '1px solid #E2E8F0',
+        padding: 'clamp(3.5rem, 6vw, 5.5rem) 0'
+      }}
+    >
       <div className="content-wrap">
         
         <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '3rem', alignItems: 'center' }} className="about-grid">
