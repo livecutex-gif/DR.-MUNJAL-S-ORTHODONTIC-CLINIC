@@ -371,16 +371,18 @@ export async function adminLogin(email, password) {
         return { success: true, user: data.user };
       }
     } catch (err) {
-      console.warn('Supabase signInWithPassword failed:', err.message);
-      // Fall through to check local credentials for demo
+      console.warn('Supabase signInWithPassword error:', err.message);
+      if (err.message?.includes('Invalid login credentials')) {
+        throw new Error('Invalid email or password. Please verify the credentials created in your Supabase Auth dashboard.');
+      } else if (err.message?.includes('Email not confirmed')) {
+        throw new Error('Email is not confirmed yet. When creating the user in Supabase, make sure "Auto Confirm User" is checked.');
+      }
+      throw new Error(err.message || 'Login failed. Please check your Supabase Auth user.');
     }
   }
 
-  // Standard Demo Portal credentials for instant review
-  const isMunjalAdmin = (email.trim().toLowerCase() === 'admin@munjalortho.clinic' && password === 'munjal123')
-    || (email.trim().toLowerCase() === 'admin@primecare.clinic' && password === 'primecare123');
-
-  if (isMunjalAdmin) {
+  // Fallback if Supabase is offline / unconfigured
+  if (email.trim().toLowerCase() === 'admin@munjalortho.clinic' && password === 'munjal123') {
     const mockUser = {
       id: 'admin-munjal-demo',
       email: email.trim().toLowerCase(),
@@ -391,7 +393,7 @@ export async function adminLogin(email, password) {
     return { success: true, user: mockUser };
   }
 
-  throw new Error('Invalid clinic administrator credentials. Use admin@munjalortho.clinic and password munjal123 for staff access.');
+  throw new Error('Invalid credentials. Please enter the email and password created in your Supabase Authentication dashboard.');
 }
 
 export async function adminLogout() {

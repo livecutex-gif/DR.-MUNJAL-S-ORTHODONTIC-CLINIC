@@ -86,10 +86,10 @@ export default function AdminLogin({ onLoginSuccess, onBackToSite }) {
           </div>
 
           <h2 style={{ fontSize: '1.6rem', fontWeight: 800, color: '#0F172A', marginBottom: '4px' }}>
-            Staff & Doctor Portal
+            Dr. Munjal’s Clinic Portal
           </h2>
           <p style={{ fontSize: '0.875rem', color: '#64748B' }}>
-            Secure access to OPD queue, appointments & settings
+            Authorized doctor & administrative staff login
           </p>
         </div>
 
@@ -122,7 +122,7 @@ export default function AdminLogin({ onLoginSuccess, onBackToSite }) {
             <div style={{ position: 'relative' }}>
               <input
                 type="email"
-                placeholder="doctor@primecare.clinic"
+                placeholder="admin@munjalortho.clinic"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="prime-input"
