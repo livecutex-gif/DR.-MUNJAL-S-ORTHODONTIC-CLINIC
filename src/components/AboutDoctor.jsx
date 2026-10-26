@@ -45,15 +45,15 @@ export default function AboutDoctor({ settings }) {
           
           {/* Left: Doctor Credentials & Story */}
           <div>
-            <div className="badge-pill badge-sky" style={{ marginBottom: '1.25rem' }}>
-              <span>Senior Orthodontist & Smile Specialist</span>
-            </div>
-
-            <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.75rem)', fontWeight: 800, color: '#0F172A', lineHeight: 1.18, marginBottom: '1.25rem' }}>
-              Meet {doctorName}
+            <h2 style={{ fontSize: 'clamp(2.1rem, 3.6vw, 2.85rem)', fontWeight: 800, color: '#0F172A', lineHeight: 1.18, marginBottom: '0.45rem' }}>
+              {doctorName}
             </h2>
 
-            <p style={{ fontSize: '1.1rem', color: '#0284C7', fontWeight: 700, marginBottom: '1.25rem' }}>
+            <div style={{ fontSize: '1.2rem', color: '#0284C7', fontWeight: 700, marginBottom: '0.65rem' }}>
+              Senior Orthodontist & Smile Specialist
+            </div>
+
+            <p style={{ fontSize: '0.98rem', color: '#64748B', fontWeight: 600, marginBottom: '1.25rem' }}>
               {doctorDegree} &bull; Reg. #{doctorReg}
             </p>
 
