@@ -65,7 +65,7 @@ html {
   color: var(--text-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;
   width: 100%;
 }
 
@@ -73,7 +73,7 @@ body {
   min-height: 100vh;
   background-color: var(--bg-primary);
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: clip;
   width: 100%;
   position: relative;
 }
@@ -115,7 +115,7 @@ input, select, textarea {
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* Bottom padding on mobile so fixed bottom sticky bar never hides content */
@@ -726,6 +726,13 @@ input, select, textarea {
 .nav-link-item:hover {
   color: #0284C7;
   background-color: rgba(2, 132, 199, 0.06);
+}
+
+.sticky-clinic-header {
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
 }
 
 /* Hero Ambient Lighting & Background Elements */

@@ -41,14 +41,15 @@ export default function Navbar({ settings, onBookClick, onNavigateAdmin, lang = 
 
   return (
     <header 
+      className="sticky-clinic-header"
       style={{ 
         position: 'sticky', 
         top: 0, 
-        zIndex: 50, 
+        zIndex: 1000, 
         width: '100%', 
         backgroundColor: '#FFFFFF',
         borderBottom: '1px solid #E2E8F0',
-        boxShadow: isScrolled ? '0 4px 20px -2px rgba(15, 23, 42, 0.08)' : '0 1px 3px rgba(0, 0, 0, 0.03)',
+        boxShadow: isScrolled ? '0 8px 24px -4px rgba(15, 23, 42, 0.1)' : '0 1px 3px rgba(0, 0, 0, 0.03)',
         transition: 'all 0.25s ease'
       }}
     >
