@@ -8,7 +8,10 @@ import {
   Award,
   ArrowRight, 
   Clock, 
-  IndianRupee 
+  IndianRupee,
+  Stethoscope,
+  Activity,
+  Calendar
 } from 'lucide-react';
 
 export const CLINIC_SERVICES = [
@@ -78,15 +81,17 @@ export default function Services({ onSelectService }) {
   return (
     <section 
       id="services" 
+      className="services-section"
       style={{ 
         backgroundColor: '#FFFFFF',
-        padding: 'clamp(3.5rem, 6vw, 5.5rem) 0'
+        padding: 'clamp(3.5rem, 6vw, 5.5rem) 0',
+        position: 'relative'
       }}
     >
-      <div className="content-wrap">
+      <div className="content-wrap" style={{ position: 'relative', zIndex: 1 }}>
         
         {/* Section Header */}
-        <div style={{ textAlign: 'center', maxWidth: '680px', margin: '0 auto 3rem auto' }}>
+        <div style={{ textAlign: 'center', maxWidth: '680px', margin: '0 auto 2.5rem auto' }}>
           <div 
             className="badge-pill badge-sky"
             style={{ marginBottom: '1rem', display: 'inline-flex' }}
@@ -108,6 +113,276 @@ export default function Services({ onSelectService }) {
 
           <p style={{ fontSize: '1.05rem', color: '#64748B', lineHeight: 1.6 }}>
             Every smile transformation is guided by certified orthodontic expertise, digital 3D intraoral planning, and painless modern clinical techniques.
+          </p>
+        </div>
+
+        {/* Featured Clinical Operatory & Technology Showcase Banner */}
+        <div 
+          className="prime-card operatory-showcase-card"
+          style={{
+            backgroundColor: '#F8FAFC',
+            border: '1px solid #E2E8F0',
+            borderRadius: '28px',
+            padding: 'clamp(1.25rem, 3vw, 2.25rem)',
+            marginBottom: '3rem',
+            boxShadow: '0 10px 30px rgba(15, 23, 42, 0.05)'
+          }}
+        >
+          <div className="operatory-grid">
+            
+            {/* Left: Real Clinic Interior Photo */}
+            <div className="operatory-image-container">
+              <div 
+                style={{
+                  position: 'relative',
+                  width: '100%',
+                  borderRadius: '20px',
+                  overflow: 'hidden',
+                  boxShadow: '0 12px 30px -8px rgba(15, 23, 42, 0.15)',
+                  backgroundColor: '#E2E8F0'
+                }}
+              >
+                <img 
+                  src="/clinic-interior.jpg" 
+                  alt="Dr. Munjal's Orthodontic Clinic Modern Dental Operatory Setup Model Town Hisar" 
+                  className="operatory-img"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    minHeight: '340px',
+                    maxHeight: '420px',
+                    objectFit: 'cover',
+                    objectPosition: 'center 40%',
+                    display: 'block',
+                    transition: 'transform 0.4s ease'
+                  }}
+                />
+
+                {/* Top Badge: Certified Clinic */}
+                <div 
+                  style={{
+                    position: 'absolute',
+                    top: '12px',
+                    right: '12px',
+                    backgroundColor: 'rgba(255, 255, 255, 0.92)',
+                    backdropFilter: 'blur(8px)',
+                    color: '#0369A1',
+                    fontSize: '0.72rem',
+                    fontWeight: 800,
+                    padding: '4px 10px',
+                    borderRadius: '9999px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    boxShadow: '0 4px 12px rgba(15, 23, 42, 0.08)'
+                  }}
+                >
+                  <Sparkles size={13} style={{ color: '#0284C7' }} />
+                  <span>100% Sterile Setup</span>
+                </div>
+
+                {/* Bottom Overlay Pill: Operatory Info */}
+                <div 
+                  style={{
+                    position: 'absolute',
+                    bottom: '12px',
+                    left: '12px',
+                    right: '12px',
+                    backgroundColor: 'rgba(15, 23, 42, 0.85)',
+                    backdropFilter: 'blur(8px)',
+                    color: '#FFFFFF',
+                    padding: '8px 12px',
+                    borderRadius: '12px',
+                    fontSize: '0.78rem',
+                    fontWeight: 600,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    flexWrap: 'wrap',
+                    gap: '4px'
+                  }}
+                >
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                    <Activity size={14} style={{ color: '#38BDF8' }} />
+                    Modern Dental Operatory
+                  </span>
+                  <span style={{ color: '#94A3B8', fontSize: '0.72rem' }}>
+                    Model Town, Hisar
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Infrastructure & Clinical Care Details */}
+            <div className="operatory-content">
+              <div 
+                className="badge-pill badge-sky" 
+                style={{ marginBottom: '0.75rem', display: 'inline-flex', padding: '3px 10px', fontSize: '0.75rem' }}
+              >
+                <span>State-of-the-Art Clinical Infrastructure</span>
+              </div>
+
+              <h3 
+                style={{ 
+                  fontSize: 'clamp(1.35rem, 2.2vw, 1.75rem)', 
+                  fontWeight: 800, 
+                  color: '#0F172A',
+                  lineHeight: 1.25,
+                  marginBottom: '0.75rem'
+                }}
+              >
+                Modern Dental Operatory & Painless Patient Care
+              </h3>
+
+              <p style={{ fontSize: '0.95rem', color: '#64748B', lineHeight: 1.6, marginBottom: '1.25rem' }}>
+                Equipped with fully automated ergonomic dental chairs, digital diagnostic units, and hospital-grade sterilization to ensure gentle, comfortable, and infection-free treatments for all age groups.
+              </p>
+
+              {/* 4 Feature Highlights Grid */}
+              <div 
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                  gap: '0.85rem',
+                  marginBottom: '1.5rem'
+                }}
+              >
+                <div 
+                  style={{
+                    backgroundColor: '#FFFFFF',
+                    border: '1px solid #E2E8F0',
+                    borderRadius: '14px',
+                    padding: '0.85rem 1rem',
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '0.75rem'
+                  }}
+                >
+                  <div style={{ color: '#0284C7', backgroundColor: '#E0F2FE', padding: '6px', borderRadius: '10px' }}>
+                    <Stethoscope size={18} />
+                  </div>
+                  <div>
+                    <h4 style={{ fontSize: '0.88rem', fontWeight: 700, color: '#0F172A', margin: 0 }}>
+                      Ergonomic Patient Chair
+                    </h4>
+                    <p style={{ fontSize: '0.78rem', color: '#64748B', margin: '2px 0 0 0', lineHeight: 1.4 }}>
+                      Relaxed positioning with smooth motorized control
+                    </p>
+                  </div>
+                </div>
+
+                <div 
+                  style={{
+                    backgroundColor: '#FFFFFF',
+                    border: '1px solid #E2E8F0',
+                    borderRadius: '14px',
+                    padding: '0.85rem 1rem',
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '0.75rem'
+                  }}
+                >
+                  <div style={{ color: '#059669', backgroundColor: '#D1FAE5', padding: '6px', borderRadius: '10px' }}>
+                    <ShieldCheck size={18} />
+                  </div>
+                  <div>
+                    <h4 style={{ fontSize: '0.88rem', fontWeight: 700, color: '#0F172A', margin: 0 }}>
+                      Class-B Autoclave
+                    </h4>
+                    <p style={{ fontSize: '0.78rem', color: '#64748B', margin: '2px 0 0 0', lineHeight: 1.4 }}>
+                      100% sterile instruments sealed per patient
+                    </p>
+                  </div>
+                </div>
+
+                <div 
+                  style={{
+                    backgroundColor: '#FFFFFF',
+                    border: '1px solid #E2E8F0',
+                    borderRadius: '14px',
+                    padding: '0.85rem 1rem',
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '0.75rem'
+                  }}
+                >
+                  <div style={{ color: '#7C3AED', backgroundColor: '#EDE9FE', padding: '6px', borderRadius: '10px' }}>
+                    <Sparkles size={18} />
+                  </div>
+                  <div>
+                    <h4 style={{ fontSize: '0.88rem', fontWeight: 700, color: '#0F172A', margin: 0 }}>
+                      Digital Diagnostics
+                    </h4>
+                    <p style={{ fontSize: '0.78rem', color: '#64748B', margin: '2px 0 0 0', lineHeight: 1.4 }}>
+                      Precise alignment & rotary apex treatment
+                    </p>
+                  </div>
+                </div>
+
+                <div 
+                  style={{
+                    backgroundColor: '#FFFFFF',
+                    border: '1px solid #E2E8F0',
+                    borderRadius: '14px',
+                    padding: '0.85rem 1rem',
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '0.75rem'
+                  }}
+                >
+                  <div style={{ color: '#D97706', backgroundColor: '#FEF3C7', padding: '6px', borderRadius: '10px' }}>
+                    <Award size={18} />
+                  </div>
+                  <div>
+                    <h4 style={{ fontSize: '0.88rem', fontWeight: 700, color: '#0F172A', margin: 0 }}>
+                      MDS Specialist Care
+                    </h4>
+                    <p style={{ fontSize: '0.78rem', color: '#64748B', margin: '2px 0 0 0', lineHeight: 1.4 }}>
+                      Every case personally treated by Dr. Puneet Munjal
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Button */}
+              <div>
+                <button
+                  onClick={() => onSelectService('Orthodontic Consultation')}
+                  className="btn-pill btn-primary"
+                  style={{
+                    padding: '0.75rem 1.5rem',
+                    fontSize: '0.9rem',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.5rem'
+                  }}
+                >
+                  <Calendar size={16} />
+                  <span>Schedule Consultation in Operatory</span>
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        {/* Specialized Procedures Heading */}
+        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+          <h3 
+            style={{ 
+              fontSize: '1.25rem', 
+              fontWeight: 800, 
+              color: '#0F172A',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem'
+            }}
+          >
+            <span>Specialized Clinical Procedures & Transparent Fees</span>
+          </h3>
+          <p style={{ fontSize: '0.9rem', color: '#64748B', margin: '4px 0 0 0' }}>
+            Select any treatment below to reserve your priority OPD consultation slot.
           </p>
         </div>
 
@@ -273,6 +548,26 @@ export default function Services({ onSelectService }) {
         </div>
 
       </div>
+
+      <style>{`
+        .operatory-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 2rem;
+          align-items: center;
+        }
+
+        .operatory-img:hover {
+          transform: scale(1.02);
+        }
+
+        @media (min-width: 900px) {
+          .operatory-grid {
+            grid-template-columns: 0.88fr 1.12fr !important;
+            gap: 2.5rem !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
